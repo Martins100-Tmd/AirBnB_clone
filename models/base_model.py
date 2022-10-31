@@ -18,8 +18,8 @@ class BaseModel:
 
     def __str__(self):
         """prints the string representation of a class"""
-        return ("[{}] ({}) {}".format(self.__class__.__name__,
-                                    self.id, self.__dict__))
+        _sn = self.__class__.__name__
+        return ("[{}] ({}) {}".format(_sn, self.id, self.__dict__))
 
     def save(self):
         """updates the update_at time to the current time"""

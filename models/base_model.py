@@ -11,26 +11,18 @@ class BaseModel:
     """model class declared"""
 
     def __init__(self, *args, **kwargs):
-        """define instance attributes"""
-        if args:
-            pass
-        if kwargs:
-            tmp = {}
-            for k, v in kwargs.items():
-                if k == 'created_at' or k == 'updated_at':
-                    v = datetime.datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
-                if k != '__class__':
-                    tmp[k] = v
-                    setattr(self, k, v)
-            if 'id' not in kwargs.items():
-                self.id = str(uuid.uuid4())
-            if 'created_at' not in kwargs.items():
-                self.created_at = _date
-            if 'updated_at' not in kwargs.items():
-                self.updated_at = _date
-        else:
+        """Instatntiates a new model"""
+        if not kwargs:
             self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = _date
+            self.created_at = _date
+            self.updated_at = _date
+        else:
+            kwargs['updated_at'] = datetime.datetime.strptime(kwargs['updated_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
+            kwargs['created_at'] = datetime.datetime.strptime(kwargs['created_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
+            del kwargs['__class__']
+            self.__dict__.update(kwargs)
 
     def __str__(self):
         """prints the string representation of a class"""
@@ -48,6 +40,6 @@ class BaseModel:
         for k, v in self.__dict__.items():
             tmp.update({k: v})
         tmp['__class__'] = self.__class__.__name__
-        tmp['created_at'] = str(_date.strftime("%Y-%m-%dT%H:%M:%S.%f"))
-        tmp['updated_at'] = str(_date.strftime("%Y-%m-%dT%H:%M:%S.%f"))
+        tmp['created_at'] = str(self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
+        tmp['updated_at'] = str(self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
         return tmp

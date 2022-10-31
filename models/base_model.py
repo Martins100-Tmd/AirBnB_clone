@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """BaseModel class file"""
 import uuid
 import json
@@ -23,7 +23,7 @@ class BaseModel:
 
     def save(self):
         """updates the update_at time to the current time"""
-        update_at = str(_date)
+        self.update_at = str(_date)
 
     def to_dict(self):
         """returns a dictionary containing key/value

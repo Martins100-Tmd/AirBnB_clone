@@ -9,22 +9,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, args):
         """quit the terminal"""
-        exit()
-
-    def do_help(self, args):
-        """Quit command to exit the program"""
-        if args:
-            args = args.split(" ")
-            if args[0] == "quit":
-                print("Quit command to exit the program\n\n")
+        return True
 
     def do_EOF(self, args):
         """quit the terminal"""
-        exit()
+        return True
 
     def emptyline(self):
         """handle an empty line command"""
-        pass
+        return False
 
 
 if __name__ == '__main__':

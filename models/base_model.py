@@ -47,8 +47,6 @@ class BaseModel:
         tmp = {}
         tmp = self.__dict__.copy()
         tmp['__class__'] = self.__class__.__name__
-        tmp['created_at'] = str(self.created_at.strftime("%Y\
-            -%m-%dT%H:%M:%S.%f"))
-        tmp['updated_at'] = str(self.updated_at.strftime("%Y\
-                -%m-%dT%H:%M:%S.%f"))
+        tmp['created_at'] = str(self.created_at.strftime(_format))
+        tmp['updated_at'] = str(self.updated_at.strftime(_format))
         return tmp

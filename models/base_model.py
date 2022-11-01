@@ -3,8 +3,8 @@
 import uuid
 import json
 import os
-import datetime
-_date = datetime.datetime.now()
+from datetime import datetime
+_format = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class BaseModel:
@@ -14,17 +14,17 @@ class BaseModel:
         """Instatntiates a new model"""
         if args:
             pass
-        if not kwargs:
-            self.id = str(uuid.uuid4())
-            self.created_at = _date
-            self.updated_at = _date
+        if kwargs:
+            for k, v in kwargs.items():
+                if k == "__class__":
+                    continue
+                if k == "updated_at" or k == "created_at":
+                    v = datetime.strptime(v, _format)
+                setattr(self, k, v)
         else:
-            kwargs['updated_at'] = datetime.datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            del kwargs['__class__']
-            self.__dict__.update(kwargs)
+            setattr(self, 'id', str(uuid.uuid4()))
+            setattr(self, 'created_at', datetime.now())
+            setattr(self, 'updated_at', datetime.now())
 
     def __str__(self):
         """prints the string representation of a class"""
@@ -33,7 +33,7 @@ class BaseModel:
 
     def save(self):
         """updates the update_at time to the current time"""
-        self.update_at = _date
+        self.update_at = datetime.now()
 
     def to_dict(self):
         """returns a dictionary containing key/value

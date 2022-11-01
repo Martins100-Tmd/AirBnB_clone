@@ -7,11 +7,11 @@ class HBNBCommand(cmd.Cmd):
     """command line interface class"""
     prompt = '(hbnb)'
 
-    def do_quit(self, args):
+    def do_quit(self, arg):
         """quit the terminal"""
         return True
 
-    def do_EOF(self, args):
+    def do_EOF(self, arg):
         """quit the terminal"""
         return True
 

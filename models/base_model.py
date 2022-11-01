@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """BaseModel class file"""
 import uuid
-import json
-import os
 from datetime import datetime
 _format = "%Y-%m-%dT%H:%M:%S.%f"
 
@@ -39,7 +37,7 @@ class BaseModel:
 
     def save(self):
         """updates the update_at time to the current time"""
-        self.update_at = datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """returns a dictionary containing key/value

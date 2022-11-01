@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from models.engine.file_storage import FileStorage
 
-storage = FileStorage()
-storage.all()
+s = FileStorage()
+s.reload()
+print(s.all())

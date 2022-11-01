@@ -2,6 +2,7 @@
 """BaseModel class file"""
 import uuid
 from datetime import datetime
+import models
 _format = "%Y-%m-%dT%H:%M:%S.%f"
 
 
@@ -29,6 +30,7 @@ class BaseModel:
             setattr(self, 'id', str(uuid.uuid4()))
             setattr(self, 'created_at', datetime.now())
             setattr(self, 'updated_at', datetime.now())
+            models.storage.new(self)
 
     def __str__(self):
         """prints the string representation of a class"""
@@ -38,6 +40,7 @@ class BaseModel:
     def save(self):
         """updates the update_at time to the current time"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """returns a dictionary containing key/value

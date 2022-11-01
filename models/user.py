@@ -1,7 +1,11 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+"""contains the User class"""
 from models.base_model import BaseModel
 
 
-class Amenity(BaseModel):
-    name = ""
+class User(BaseModel):
+    """User class"""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""

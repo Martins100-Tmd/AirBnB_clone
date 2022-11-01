@@ -11,7 +11,13 @@ class BaseModel:
     """model class declared"""
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
+        """Instantiates a new model
+
+        Args:
+            arg(tuple): does nothing
+            kwargs(dict): dict of key/value attr and value
+            of new class instance
+        """
         if args:
             pass
         if kwargs:
@@ -39,8 +45,7 @@ class BaseModel:
         """returns a dictionary containing key/value
         of __dict__ of the instance"""
         tmp = {}
-        for k, v in self.__dict__.items():
-            tmp.update({k: v})
+        tmp = self.__dict__.copy()
         tmp['__class__'] = self.__class__.__name__
         tmp['created_at'] = str(self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))
         tmp['updated_at'] = str(self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f"))

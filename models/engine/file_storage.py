@@ -2,6 +2,8 @@
 """
 Contains FileStorage class
 """
+
+
 import json
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -10,7 +12,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -51,11 +52,9 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
-        load = {}
         try:
             with open(FileStorage.__file_path, "r") as f:
                 load = json.load(f)
-            print(load)
             for key, value in load.items():
                 FileStorage.__objects[key] = eval(value["__class__"])(**value)
         except Exception:

@@ -36,12 +36,14 @@ button:hover{
         font-weight: 400;
         font-size: 14px;
 }
-.filters .popover{
+.filters .popover div,
+.filters .amenities div{
 	display: none;
 	width: 100%;
 	border: 1px #DDDDDD;
 	border-radius: 4px;
 }
-.filters .popover h2{
+.filters .popover h2,
+.filters .amenities h2{
 	font-size: 16px;
 }
